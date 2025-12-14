@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            max-width: 450px;
+            width: 100%;
+            animation: slideUp 0.5s;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+        }
+
+        .login-body {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .demo-credentials {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .demo-credentials h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .demo-credentials p {
+            margin: 8px 0;
+            color: #475569;
+            font-size: 0.9em;
+        }
+
+        .demo-credentials strong {
+            color: #2563eb;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #94a3b8;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>🏨 Hostel Management</h1>
+            <p>Please login to continue</p>
+        </div>
+
+        <div class="login-body">
+            <div id="alert" class="alert"></div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>User Type</label>
+                    <select id="userType" required>
+                        <option value="">Select User Type</option>
+                        <option value="admin">Admin</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Username / Student ID</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <div class="divider">Demo Credentials</div>
+
+            <div class="demo-credentials">
+                <h3>👨‍💼 Admin Login:</h3>
+                <p><strong>Username:</strong> admin</p>
+                <p><strong>Password:</strong> admin123</p>
+
+                <h3 style="margin-top: 15px;">👨‍🎓 Student Login:</h3>
+                <p><strong>Username:</strong> student</p>
+                <p><strong>Password:</strong> student123</p>
+                <p style="margin-top: 10px; font-size: 0.85em; color: #64748b;">
+                    Note: Students can only view their own data. Admins have full access.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Default credentials
+        const credentials = {
+            admin: {
+                username: 'admin',
+                password: 'admin123',
+                type: 'admin',
+                name: 'Administrator'
+            },
+            student: {
+                username: 'student',
+                password: 'student123',
+                type: 'student',
+                name: 'John Doe',
+                studentId: 'STU001'
+            }
+        };
+
+        function showAlert(message, type = 'danger') {
+            const alert = document.getElementById('alert');
+            alert.className = `alert alert-${type} show`;
+            alert.textContent = message;
+            setTimeout(() => alert.classList.remove('show'), 4000);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+
+            const userType = document.getElementById('userType').value;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!userType) {
+                showAlert('Please select user type!');
+                return;
+            }
+
+            // Check credentials
+            const user = credentials[userType];
+            
+            if (user && user.username === username && user.password === password) {
+                // Store user session
+                const session = {
+                    userType: user.type,
+                    username: user.username,
+                    name: user.name,
+                    studentId: user.studentId || null,
+                    loginTime: new Date().toISOString()
+                };
+
+                localStorage.setItem('hostel_session', JSON.stringify(session));
+                
+                showAlert('Login successful! Redirecting...', 'success');
+                
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            } else {
+                showAlert('Invalid username or password!');
+            }
+        }
+
+        // Check if already logged in
+        window.addEventListener('DOMContentLoaded', function() {
+            const session = localStorage.getItem('hostel_session');
+            if (session) {
+                const user = JSON.parse(session);
+                showAlert(`Already logged in as ${user.name}. Redirecting...`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
